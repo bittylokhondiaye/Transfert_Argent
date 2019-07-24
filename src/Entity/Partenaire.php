@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\PartenaireRepository")
  */
-class Partenaire extends AdminPartenaire
+class Partenaire 
 {
     /**
      * @ORM\Id()
@@ -21,26 +21,11 @@ class Partenaire extends AdminPartenaire
     private $id;
 
 
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $login;
-
     /**
      * @ORM\Column(type="string")
      */
     private $MotDePasse;
 
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $Prenom;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $Nom;
 
     /**
      * @ORM\Column(type="integer")
@@ -52,10 +37,6 @@ class Partenaire extends AdminPartenaire
      */
     private $Mail;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $CNI;
 
 
 
@@ -89,11 +70,7 @@ class Partenaire extends AdminPartenaire
      */
     private $compte;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SuperAdmin", inversedBy="Partenaire")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $superAdmin;
+    
 
     public function __construct()
     {
@@ -106,18 +83,6 @@ class Partenaire extends AdminPartenaire
     }
 
 
-    public function getLogin(): ?int
-    {
-        return $this->login;
-    }
-
-    public function setLogin(int $login): self
-    {
-        $this->login = $login;
-
-        return $this;
-    }
-
     public function getMotDePasse(): ?string
     {
         return $this->MotDePasse;
@@ -126,30 +91,6 @@ class Partenaire extends AdminPartenaire
     public function setMotDePasse(string $MotDePasse): self
     {
         $this->MotDePasse = $MotDePasse;
-
-        return $this;
-    }
-
-    public function getPrenom(): ?string
-    {
-        return $this->Prenom;
-    }
-
-    public function setPrenom(string $Prenom): self
-    {
-        $this->Prenom = $Prenom;
-
-        return $this;
-    }
-
-    public function getNom(): ?string
-    {
-        return $this->Nom;
-    }
-
-    public function setNom(string $Nom): self
-    {
-        $this->Nom = $Nom;
 
         return $this;
     }
@@ -174,18 +115,6 @@ class Partenaire extends AdminPartenaire
     public function setMail(string $Mail): self
     {
         $this->Mail = $Mail;
-
-        return $this;
-    }
-
-    public function getCNI(): ?int
-    {
-        return $this->CNI;
-    }
-
-    public function setCNI(int $CNI): self
-    {
-        $this->CNI = $CNI;
 
         return $this;
     }
@@ -287,7 +216,7 @@ class Partenaire extends AdminPartenaire
         return $this;
     }
 
-    public function getSuperAdmin(): ?SuperAdmin
+    /* public function getSuperAdmin(): ?SuperAdmin
     {
         return $this->superAdmin;
     }
@@ -297,5 +226,5 @@ class Partenaire extends AdminPartenaire
         $this->superAdmin = $superAdmin;
 
         return $this;
-    }
+    } */
 }
