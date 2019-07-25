@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ApiResource()
  * @ORM\Entity(repositoryClass="App\Repository\SuperAdminRepository")
  */
-class SuperAdmin
+class SuperAdmin 
 {
     /**
      * @ORM\Id()
