@@ -6,11 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Partenaire;
+use App\Entity\UserPartenaire;
 use App\Repository\PartenaireRepository;
+use App\Repository\UserPartenaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Compenent\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
-
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/api")
@@ -30,7 +32,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/api/partenaires", name="ajouPartenaire",methods={"POST"}) 
+     * @Route("api/partenaires", name="ajouPartenaire",methods={"POST"}) 
      */
     public function ajoutPartenaire(Partenaire $partenaire,Request $request,SerializerInterface $serializer, EntityManagerInterface $entityManager)
     {
@@ -44,4 +46,21 @@ class UserController extends AbstractController
 
         return new JsonResponse($data,201);
     }
+
+
+    /**
+     * @Route("/userPartenaires", name="addUserPartenaire", methods={"POST"})
+     */
+    public function addUserPartenaire(Request $request, SerializerInterface $serializer,EntityManagerInterface $entityManager)
+    {
+        $userPartenaire = $serializer->deserialize($request->getContent(), UserPartenaire::class, 'json');
+        $entityManager->persist($userPartenaire);
+        $entityManager->flush();
+        $data = [
+            'status' => 201,
+            'message' => 'Le UserPartenaire a bien été ajouté'
+        ];
+        return new JsonResponse($data, 201);
+    }
+
 }

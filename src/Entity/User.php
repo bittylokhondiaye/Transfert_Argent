@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *@UniqueEntity(fields={"email"}, message="Cet utilisateur existe déjà")
  */
 class User implements UserInterface
 {
@@ -46,11 +48,23 @@ class User implements UserInterface
      */
 
 
-    public function getEmail(): ?string
+    public function getEmail(): string
     {
         return $this->email;
     }
 
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
    
 
     
